@@ -66,6 +66,31 @@ public class UserProgram {
 
         System.out.print("Masukkan jumlah: ");
         int qty = sc.nextInt();
+        int banyakModifier=0;
+        for (boolean b:produk.modifiable){
+            if (b) banyakModifier++;
+        }
+        if (banyakModifier>0) {
+            System.out.println("Apakah memerlukan add-on?");
+            if (banyakModifier==2){
+                System.out.println("1.Bungkus Kado Rp3000");
+                System.out.println("2.Bubble Wrap Rp4000");
+                System.out.println("0. tidak perlu");
+                int input = sc.nextInt();
+                if (input!=0)produk = produk.wrap(input);
+            }
+            else if (banyakModifier==1){
+                if (produk.modifiable[0]) System.out.println("1.Bungkus Kado Rp3000");
+                if (produk.modifiable[1]) System.out.println("1.Bubble Wrap Rp4000");
+                System.out.println("0. tidak perlu");
+                int input = sc.nextInt();
+                if (input!=0) {
+                    if (produk.modifiable[0])produk = produk.wrap(1);
+                    else produk = produk.wrap(2);
+                }
+            }
+            
+        }
 
         addToCart(produk, qty);
         System.out.println("Produk ditambahkan ke keranjang.");
@@ -98,6 +123,7 @@ public class UserProgram {
         System.out.println("Melakukan checkout...");
         Cart myCart = Cart.getCart();
         System.out.println("Masukkan alamat tujuan\n");
+        sc.nextLine();
         String alamat = sc.nextLine();
         System.out.println("Tolong pilih metode pembayaran");
         System.out.println("1.Qris\n2.Transfer Bank\n");

@@ -21,13 +21,12 @@ public class Toko{
         String productName;
         int price;
         int qty;
-        boolean[] modifier;
         products = new HashMap<>();
         Scanner sc = new Scanner(Paths.get("./src/AdminView/dataProduk.data"));
         Scanner productScanner;
         while(sc.hasNext()){
             String nextProduct = sc.nextLine();
-            modifier = new boolean[2];
+            boolean[] modifier = new boolean[2];
             productScanner = new Scanner(nextProduct);
             id = productScanner.nextInt();
             productName = productScanner.next();
