@@ -8,6 +8,7 @@ import UserView.Cart;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Map;
+import java.time.LocalDate;
 /**
  *
  * @author Rits08
@@ -24,7 +25,7 @@ public class Logger{
         }
         String pesananBaru = "";
         for (Order order:orders){
-            pesananBaru+=order.qty+" "+order.produk.toString()+" to be delivered by"+order.strategy+" to"+alamat+"\n";
+            pesananBaru+=LocalDate.now()+" "+order.qty+" "+order.produk.toString()+" to be delivered by "+order.strategy+" to "+alamat+"\n";
         }
         FileWriter fw = new FileWriter("logs.data", true);
         fw.write(pesananBaru);

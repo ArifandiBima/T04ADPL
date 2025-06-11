@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 
 public class AdminProgram{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         Scanner sc = new Scanner(System.in);
         int perintah=0;
         boolean lanjut=true;
@@ -58,7 +58,7 @@ public class AdminProgram{
             //ADA TAMBAHAN DI SINI
         }
     }
-   private static void editProducts(Scanner sc)throws Exception{
+    private static void editProducts(Scanner sc)throws Exception{
     if(Toko.getProducts().isEmpty()){
         System.out.println("Tidak ada produk untuk diedit.");
         return;

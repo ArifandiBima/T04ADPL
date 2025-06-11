@@ -27,7 +27,7 @@ class MainProduct extends Product{
         this.modifiable = modifiable;
     }
     public MainProduct(int id, String nama, int price){
-        this(id,nama, price,0,new boolean[1]);
+        this(id,nama, price,0,new boolean[2]);
     }
     public MainProduct(int id, String nama, int price, boolean[] modifiable){
         this(id,nama, price, 0, modifiable);
@@ -72,6 +72,29 @@ class BungkusKado extends Product{
     public boolean equals(Object other){
         if (!(other instanceof BungkusKado)) return false;
         return this.produk.equals(((BungkusKado)other).produk);
+    }
+}
+class BubbleWrap extends Product{
+    Product produk;    
+    public BubbleWrap(Product isi){
+        this.produk = isi;
+    }
+    @Override
+    public int countPrice(){
+        return this.produk.countPrice()+3000;                   //unimplemented
+    }
+    @Override
+    public String toString(){
+        return this.produk.toString()+" dibungkus bubble Wrap";
+    }
+    @Override
+    public int hashCode(){
+        return this.toString().hashCode();
+    }
+    @Override
+    public boolean equals(Object other){
+        if (!(other instanceof BubbleWrap)) return false;
+        return this.produk.equals(((BubbleWrap)other).produk);
     }
 }
 
