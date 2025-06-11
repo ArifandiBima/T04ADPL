@@ -24,23 +24,35 @@ public class Toko{
         boolean[] modifier;
         products = new HashMap<>();
         Scanner sc = new Scanner(Paths.get("AdminView/dataProduk.data"));
-        Scanner productScanner;
         while(sc.hasNext()){
             String nextProduct = sc.nextLine();
             modifier = new boolean[2];
-            productScanner = new Scanner(nextProduct);
-            id = productScanner.nextInt();
-            productName = productScanner.next();
-            price = productScanner.nextInt();
-            qty = productScanner.nextInt();
-            while(productScanner.hasNext()){
-                int modIndex = productScanner.nextInt();
+            // Split the line by spaces
+            String[] parts = nextProduct.split(" ");
+            id = Integer.parseInt(parts[0]);
+            // Find price and qty positions (last two or last three if modifiers)
+            int priceIndex = parts.length - 2;
+            int qtyIndex = parts.length - 1;
+            // Parse price and qty
+            price = Integer.parseInt(parts[priceIndex]);
+            qty = Integer.parseInt(parts[qtyIndex]);
+            // productName is all parts between id and priceIndex
+            StringBuilder nameBuilder = new StringBuilder();
+            for(int i=1; i<priceIndex; i++){
+                nameBuilder.append(parts[i]);
+                if(i < priceIndex - 1){
+                    nameBuilder.append(" ");
+                }
+            }
+            productName = nameBuilder.toString();
+            // Parse modifiers if any
+            for(int i=qtyIndex+1; i<parts.length; i++){
+                int modIndex = Integer.parseInt(parts[i]);
                 if(modIndex >= 1 && modIndex <= modifier.length){
                     modifier[modIndex-1] = true;
                 }
             }
             products.put(id,(new MainProduct(id,productName,price,qty,modifier)));
-            productScanner.close();
         }
         sc.close();
         
