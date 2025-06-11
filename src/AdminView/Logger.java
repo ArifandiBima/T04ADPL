@@ -5,15 +5,29 @@
 package AdminView;
 
 import UserView.Cart;
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Map;
 /**
  *
  * @author Rits08
  */
 
 //maybe ini observer juga tapi kayak listener doang gitu
-public class Logger {
-    public static void log(Cart cart){
+public class Logger{
+    public static void logPesanan(Cart cart, String alamat) throws Exception{
+        ArrayList<Order> orders = new ArrayList<>();
         //log tiap kali ada order per item kita tentuin ngirimnya pake apa dan dilog
+        for (Map.Entry<Product, Integer> entry:cart.contents.entrySet()){
+            Order pesanan = new Order(entry.getKey(), alamat,entry.getValue());
+            orders.add(pesanan);
+        }
+        String pesananBaru = "";
+        for (Order order:orders){
+            pesananBaru+=order.qty+" "+order.produk.toString()+" to be delivered by"+order.strategy+" to"+alamat+"\n";
+        }
+        FileWriter fw = new FileWriter("logs.data", true);
+        fw.write(pesananBaru);
     }
     //method static tiap kali ada update di sini dilog, cuma write ke log doang
 }

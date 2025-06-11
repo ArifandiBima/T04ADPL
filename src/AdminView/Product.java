@@ -32,6 +32,7 @@ class MainProduct extends Product{
     public MainProduct(int id, String nama, int price, boolean[] modifiable){
         this(id,nama, price, 0, modifiable);
     }
+    @Override
     public int countPrice(){
         return this.price;
     }

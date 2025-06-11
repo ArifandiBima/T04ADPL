@@ -56,7 +56,7 @@ public class AdminProgram{
     }
 
     System.out.println("Masukkan ID produk yang ingin diedit:");
-    String id = sc.next();
+    int id = sc.nextInt();
     
     MainProduct produk = Toko.products.get(id);
     if(produk == null){
@@ -74,11 +74,10 @@ public class AdminProgram{
         System.out.println("4. Kembali");
 
         int pilihan = sc.nextInt();
-        sc.nextLine(); // bersihkan newline
         switch(pilihan){
             case 1:
                 System.out.print("Masukkan nama baru: ");
-                produk.nama = sc.nextLine();
+                produk.nama = sc.next();
                 System.out.println("Nama diperbarui.");
                 break;
             case 2:
@@ -98,6 +97,7 @@ public class AdminProgram{
                 System.out.println("Pilihan tidak valid.");
         }
     }
+    
 }
 
 }

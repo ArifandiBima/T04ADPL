@@ -16,7 +16,7 @@ import AdminView.Product;
 //singleton cart
 public class Cart {
     private static Cart implemented;
-    private HashMap<Product,int> contents;
+    public HashMap<Product,Integer> contents;
     private Cart(){
         this.contents = new HashMap<>();
     }
@@ -30,9 +30,16 @@ public class Cart {
         }
         return implemented;
     }
-    public static boolean Checkout(int metode,int id, String embel_embel){
-        if(!PaymentMethod.verify(id, embel_embel)) return false;
-        Logger.log(implemented);
+    public int countTotal(){
+        return 0;
+        //unimplemented
+    }
+    public static boolean Checkout(int metode,int id, String alamat){
+        if(!PaymentMethod.verify(id, "embel_embel")) return false;
+        try{
+            Logger.logPesanan(implemented, alamat);
+        }
+        catch(Exception e){}
         implemented =null;
         return true;
     }
