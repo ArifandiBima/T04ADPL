@@ -75,5 +75,30 @@ class BungkusKado extends Product{
     }
 }
 
+class BubbleWrap extends Product{
+    Product produk;    
+    public BubbleWrap(Product isi){
+        this.produk = isi;
+    }
+    @Override
+    public int countPrice(){
+        return this.produk.countPrice()+3000;                   //unimplemented
+    }
+    @Override
+    public String toString(){
+        return this.produk.toString()+" dibungkus wrap";
+    }
+    @Override
+    public int hashCode(){
+        return this.toString().hashCode();
+    }
+    @Override
+    public boolean equals(Object other){
+        if (!(other instanceof BubbleWrap)) return false;
+        return this.produk.equals(((BubbleWrap)other).produk);
+    }
+}
+
+
 //bisa nambahin hal lain yang bisa dikasih extra
 
