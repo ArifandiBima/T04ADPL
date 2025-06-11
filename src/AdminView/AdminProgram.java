@@ -20,7 +20,7 @@ public class AdminProgram{
         while (lanjut){
 
             while(perintah==0){
-                System.out.println("choose what to do\n 1.View Products\n 2.edit\n3.exit\n");
+                System.out.println(" ==== ADMIN MENU ==== \n choose what to do: \n 1.View Products\n 2.Edit Product\n 3.Exit\n");
                 try {
                     perintah = sc.nextInt();
                     if (perintah>3||perintah<1) {
@@ -41,11 +41,12 @@ public class AdminProgram{
                     break;
                 default:lanjut=false;
             }
+            perintah = 0;
         }
     }
     private static void listProducts(){
         try{
-            Toko.getProducts();
+            Toko.products = Toko.getProducts();
         }
         catch(Exception e){}
         if(Toko.products.isEmpty()){
@@ -106,6 +107,6 @@ public class AdminProgram{
                 System.out.println("Pilihan tidak valid.");
         }
     }
-    
+    Toko.changeData();
 }
 }

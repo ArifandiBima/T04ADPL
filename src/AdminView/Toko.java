@@ -23,7 +23,7 @@ public class Toko{
         int qty;
         boolean[] modifier;
         products = new HashMap<>();
-        Scanner sc = new Scanner(Paths.get("dataProduk.data"));
+        Scanner sc = new Scanner(Paths.get("AdminView/dataProduk.data"));
         Scanner productScanner;
         while(sc.hasNext()){
             String nextProduct = sc.nextLine();
@@ -34,7 +34,10 @@ public class Toko{
             price = productScanner.nextInt();
             qty = productScanner.nextInt();
             while(productScanner.hasNext()){
-                modifier[productScanner.nextInt()-1]=true;
+                int modIndex = productScanner.nextInt();
+                if(modIndex >= 1 && modIndex <= modifier.length){
+                    modifier[modIndex-1] = true;
+                }
             }
             products.put(id,(new MainProduct(id,productName,price,qty,modifier)));
             productScanner.close();
@@ -54,7 +57,7 @@ public class Toko{
             }
             toWrite+='\n';
         }
-        Files.writeString(Paths.get("dataProduk.data"), toWrite);
+        Files.writeString(Paths.get("AdminView/dataProduk.data"), toWrite);
     }
     
 }
