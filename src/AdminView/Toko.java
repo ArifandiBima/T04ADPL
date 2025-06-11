@@ -50,9 +50,9 @@ public class Toko{
         String toWrite ="";
         for (MainProduct product: products.values()){
             toWrite+= product.id+" "+product.nama+" "+product.price+" "+product.qty;
-            for (int i=0;i<1;i++){
+            for (int i=0;i<product.modifiable.length;i++){
                 if (product.modifiable[i]){
-                    toWrite+=" "+i;
+                    toWrite+=" "+(i+1);
                 }
             }
             toWrite+='\n';
