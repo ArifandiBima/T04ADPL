@@ -23,7 +23,7 @@ public class Toko{
         int qty;
         boolean[] modifier;
         products = new HashMap<>();
-        Scanner sc = new Scanner(Paths.get("AdminView/dataProduk.data"));
+        Scanner sc = new Scanner(Paths.get("./src/AdminView/dataProduk.data"));
         Scanner productScanner;
         while(sc.hasNext()){
             String nextProduct = sc.nextLine();
