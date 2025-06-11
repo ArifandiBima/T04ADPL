@@ -39,7 +39,9 @@ public class Cart {
         try{
             Logger.logPesanan(implemented, alamat);
         }
-        catch(Exception e){}
+        catch(Exception e){
+            System.out.print("gak kelog");
+        }
         implemented =null;
         return true;
     }

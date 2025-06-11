@@ -10,8 +10,12 @@ package AdminView;
  */
 //menggunakan design pattern decorator
 public abstract class Product {
-    boolean[] modifiable;    //buat ngedata dia bisa dikasih apa aja gue
+    public boolean[] modifiable;    //buat ngedata dia bisa dikasih apa aja gue
     public abstract int countPrice();
+    public Product wrap(int wrapper){
+        if (wrapper==1) return new BungkusKado(this);
+        return new BubbleWrap(this);
+    }
 }
 
 class MainProduct extends Product{
@@ -83,7 +87,7 @@ class BubbleWrap extends Product{
     }
     @Override
     public int countPrice(){
-        return this.produk.countPrice()+3000;                   //unimplemented
+        return this.produk.countPrice()+4000;                   //unimplemented
     }
     @Override
     public String toString(){

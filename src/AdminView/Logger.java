@@ -27,8 +27,16 @@ public class Logger{
         for (Order order:orders){
             pesananBaru+=LocalDate.now()+" "+order.qty+" "+order.produk.toString()+" to be delivered by "+order.strategy+" to "+alamat+"\n";
         }
-        FileWriter fw = new FileWriter("/src/AdminView/logs.data", true);
-        fw.write(pesananBaru);
+        try{
+            FileWriter fw = new FileWriter("./src/AdminView/logs.data", true);
+            fw.write(pesananBaru);
+            fw.close();
+            
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+        
     }
     //method static tiap kali ada update di sini dilog, cuma write ke log doang
 }
