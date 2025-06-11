@@ -10,6 +10,7 @@ package AdminView;
  */
 //menggunakan design pattern decorator
 public abstract class Product {
+    boolean[] modifiable;    //buat ngedata dia bisa dikasih apa aja gue
     public abstract int countPrice();
 }
 
@@ -17,8 +18,7 @@ class MainProduct extends Product{
     int id;
     String nama;
     int price;
-    int qty;
-    boolean[] modifiable;     //buat ngedata dia bisa dikasih apa aja gue
+    int qty; 
     public MainProduct(int id, String nama, int price, int qty, boolean[] modifiable){
         this.id=id;
         this.nama=nama;
@@ -38,7 +38,7 @@ class MainProduct extends Product{
     }
     @Override
     public String toString(){
-        return this.nama;
+        return this.nama+" Rp"+this.price+" ";
     }
     @Override
     public int hashCode(){
@@ -55,6 +55,7 @@ class BungkusKado extends Product{
     Product produk;    
     public BungkusKado(Product isi){
         this.produk = isi;
+        this.modifiable = new boolean[]{true,false};
     }
     @Override
     public int countPrice(){
@@ -78,6 +79,7 @@ class BubbleWrap extends Product{
     Product produk;    
     public BubbleWrap(Product isi){
         this.produk = isi;
+        this.modifiable = new boolean[]{false,true};
     }
     @Override
     public int countPrice(){
@@ -86,30 +88,6 @@ class BubbleWrap extends Product{
     @Override
     public String toString(){
         return this.produk.toString()+" dibungkus bubble Wrap";
-    }
-    @Override
-    public int hashCode(){
-        return this.toString().hashCode();
-    }
-    @Override
-    public boolean equals(Object other){
-        if (!(other instanceof BubbleWrap)) return false;
-        return this.produk.equals(((BubbleWrap)other).produk);
-    }
-}
-
-class BubbleWrap extends Product{
-    Product produk;    
-    public BubbleWrap(Product isi){
-        this.produk = isi;
-    }
-    @Override
-    public int countPrice(){
-        return this.produk.countPrice()+3000;                   //unimplemented
-    }
-    @Override
-    public String toString(){
-        return this.produk.toString()+" dibungkus wrap";
     }
     @Override
     public int hashCode(){

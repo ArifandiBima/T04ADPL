@@ -34,8 +34,8 @@ public class Cart {
         return 0;
         //unimplemented
     }
-    public static boolean Checkout(int metode,int id, String alamat){
-        if(!PaymentMethod.verify(id, "embel_embel")) return false;
+    public boolean checkOut(int metode, String alamat){
+        if(!PaymentMethod.verify(metode, "embel_embel")) return false;
         try{
             Logger.logPesanan(implemented, alamat);
         }
