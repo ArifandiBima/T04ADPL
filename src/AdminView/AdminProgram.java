@@ -38,7 +38,10 @@ public class AdminProgram{
         }
     }
     private static void listProducts(){
-        //unimplemented
+        try{
+            Toko.getProducts();
+        }
+        catch(Exception e){}
         if(Toko.products.isEmpty()){
             System.out.println("No Product Available");
         }else{
@@ -49,8 +52,8 @@ public class AdminProgram{
             //ADA TAMBAHAN DI SINI
         }
     }
-   private static void editProducts(Scanner sc){
-    if(Toko.products.isEmpty()){
+   private static void editProducts(Scanner sc)throws Exception{
+    if(Toko.getProducts().isEmpty()){
         System.out.println("Tidak ada produk untuk diedit.");
         return;
     }

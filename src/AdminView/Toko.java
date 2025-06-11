@@ -13,7 +13,7 @@ import java.util.Scanner;
  * @author Rits08
  */
 public class Toko{
-    static HashMap<Integer,MainProduct> products;
+    public static HashMap<Integer,MainProduct> products;
     //nanti kalo mau pake basis data diganti lagi
 
     public static HashMap<Integer, MainProduct> getProducts() throws Exception{
