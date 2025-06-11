@@ -12,7 +12,7 @@ import AdminView.Product;
 import java.util.Scanner;
 
 public class AdminProgram{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         Scanner sc = new Scanner(System.in);
         int perintah=0;
         boolean lanjut=true;
