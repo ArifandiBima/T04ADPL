@@ -11,7 +11,7 @@ package AdminView;
 import AdminView.Product;
 import java.util.Scanner;
 
-
+// test
 public class AdminProgram{
     public static void main(String[] args) throws Exception{
         Scanner sc = new Scanner(System.in);
@@ -20,7 +20,8 @@ public class AdminProgram{
         while (lanjut){
 
             while(perintah==0){
-                System.out.println(" ==== ADMIN MENU ==== \n choose what to do: \n 1.View Products\n 2.Edit Product\n 3.Exit\n");
+                // rapihin menu
+                System.out.println(" ==== ADMIN MENU ==== \n choose what to do: \n 1.View Products\n 2.Edit Product\n 3.Exit\n"); 
                 try {
                     perintah = sc.nextInt();
                     if (perintah>3||perintah<1) {
