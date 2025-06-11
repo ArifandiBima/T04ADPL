@@ -46,6 +46,7 @@ public class AdminProgram{
             for(MainProduct produk: Toko.products.values()){
                 System.out.println(produk.id+ " " + produk.nama+" stock:"+produk.qty+" harga:"+produk.price);
             }
+            //ADA TAMBAHAN DI SINI
         }
     }
     private static void editProducts(Scanner sc){
