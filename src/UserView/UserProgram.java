@@ -36,18 +36,78 @@ public class UserProgram {
         }
     }
     private static void listProducts(Scanner sc){
-        //unimplemented
+    if (Toko.products.isEmpty()) {
+        System.out.println("Tidak ada produk tersedia.");
+        return;
     }
+
+    System.out.println("Daftar Produk:");
+    for (MainProduct p : Toko.products.values()) {
+        System.out.println(p.id + " | " + p.nama + " | Stok: " + p.qty + " | Harga: " + p.price);
+    }
+
+    System.out.print("Masukkan ID produk untuk ditambahkan ke keranjang (atau ketik '0' untuk kembali): ");
+    String id = sc.next();
+    if (id.equals("0")) return;
+
+    MainProduct produk = Toko.products.get(id);
+    if (produk == null) {
+        System.out.println("Produk tidak ditemukan.");
+        return;
+    }
+
+    System.out.print("Masukkan jumlah: ");
+    int qty = sc.nextInt();
+    if (qty <= 0 || qty > produk.qty) {
+        System.out.println("Jumlah tidak valid atau stok tidak mencukupi.");
+        return;
+    }
+
+    addToCart(produk.id, qty);
+    System.out.println("Produk ditambahkan ke keranjang.");
+}
+
     private static void viewCart(Scanner sc){
-        //unimplemented
+    if (Cart.isEmpty()) {
+        System.out.println("Keranjang kamu kosong.");
+        return;
     }
+
+    System.out.println("Isi Keranjang:");
+    for (String id : cart.keySet()) {
+        MainProduct p = Toko.products.get(id);
+        System.out.println(p.nama + " | Qty: " + Cart.getCart(id) + " | Subtotal: " + (p.price * Cart.getCart(id)));
+    }
+
+    System.out.println("Total: " + countTotalPrice());
+    System.out.print("Ketik 1 untuk checkout atau 0 untuk kembali: ");
+    int opsi = sc.nextInt();
+    if (opsi == 1) checkOut();
+}
+
     private static void addToCart(int id, int qty){
-        //unimplemented
+        Cart.put(id, Cart.getOrDefault(id, 0) + qty);
     }
+    
     private static void checkOut(){
-        //unimplemented facade?
+    System.out.println("Melakukan checkout...");
+    for (String id : Cart.keySet()) {
+        int qty = Cart.get(id);
+        MainProduct p = Toko.products.get(id);
+        p.qty -= qty; // kurangi stok
     }
+    System.out.println("Checkout berhasil. Terima kasih sudah belanja!");
+    Cart.clear(); // kosongkan keranjang
+}
+
     private static int countTotalPrice(){
-        return 0;       //unimplemented
+    int total = 0;
+    for (String id : Cart.keySet()) {
+        MainProduct p = Toko.products.get(id);
+        total += p.price * cart.get(id);
     }
+    return total;
+}
+        //return 0;       //unimplemented
+    
 }
