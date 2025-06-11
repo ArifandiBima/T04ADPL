@@ -7,6 +7,7 @@ package UserView;
 import java.util.HashMap;
 
 import AdminView.Logger;
+import AdminView.Product;
 /**
  *
  * @author Rits08
@@ -15,13 +16,13 @@ import AdminView.Logger;
 //singleton cart
 public class Cart {
     private static Cart implemented;
-    private HashMap<Integer,Integer> contents;
+    private HashMap<Product,int> contents;
     private Cart(){
         this.contents = new HashMap<>();
     }
-    public void addToCart(int id, int qty){
-        qty += this.contents.getOrDefault(id, 0);
-        this.contents.put(id, qty);
+    public void addToCart(Product product, int qty){
+        qty += this.contents.getOrDefault(product, 0);
+        this.contents.put(product, qty);
     }
     public static Cart getCart(){
         if (implemented==null){

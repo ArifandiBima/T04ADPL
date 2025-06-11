@@ -43,7 +43,7 @@ public class Toko{
         
         return products;
     }
-    public static void notifyChange()throws Exception{
+    public static void changeData()throws Exception{
         String toWrite ="";
         for (MainProduct product: products.values()){
             toWrite+= product.id+" "+product.nama+" "+product.price+" "+product.qty;

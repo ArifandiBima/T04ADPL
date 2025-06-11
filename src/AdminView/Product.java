@@ -10,7 +10,6 @@ package AdminView;
  */
 //menggunakan design pattern decorator
 public abstract class Product {
-    Product produk;    
     public abstract int countPrice();
 }
 
@@ -40,17 +39,38 @@ class MainProduct extends Product{
     public String toString(){
         return this.nama;
     }
+    @Override
+    public int hashCode(){
+        return this.toString().hashCode();
+    }
+    @Override
+    public boolean equals(Object other){
+        if (!(other instanceof MainProduct)) return false;
+        return this.id==((MainProduct) other).id;
+    }
 }
 
 class BungkusKado extends Product{
+    Product produk;    
     public BungkusKado(Product isi){
         this.produk = isi;
     }
+    @Override
     public int countPrice(){
         return this.produk.countPrice()+3000;                   //unimplemented
     }
+    @Override
     public String toString(){
         return this.produk.toString()+" dibungkus kado";
+    }
+    @Override
+    public int hashCode(){
+        return this.toString().hashCode();
+    }
+    @Override
+    public boolean equals(Object other){
+        if (!(other instanceof BungkusKado)) return false;
+        return this.produk.equals(((BungkusKado)other).produk);
     }
 }
 
