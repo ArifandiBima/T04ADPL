@@ -4,6 +4,7 @@
  */
 package UserView;
 import AdminView.Product;
+import java.util.Map;
 import java.util.Scanner;
 /**
  *
@@ -68,15 +69,15 @@ public class UserProgram {
 }
 
     private static void viewCart(Scanner sc){
-    if (Cart.isEmpty()) {
+        Cart myCart = Cart.getCart();
+    if (myCart.contents.isEmpty()) {
         System.out.println("Keranjang kamu kosong.");
         return;
     }
 
     System.out.println("Isi Keranjang:");
-    for (String id : cart.keySet()) {
-        MainProduct p = Toko.products.get(id);
-        System.out.println(p.nama + " | Qty: " + Cart.getCart(id) + " | Subtotal: " + (p.price * Cart.getCart(id)));
+    for (Map.Entry<Product,Integer> entry: myCart.contents.entrySet()) {
+        System.out.println(entry.getKey().toString() + " | Qty: " + entry.getValue());
     }
 
     System.out.println("Total: " + countTotalPrice());
