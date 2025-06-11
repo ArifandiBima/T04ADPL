@@ -23,10 +23,10 @@ public class Order {
         this.produk = produk;
         this.alamat = alamat;
         this.qty = qty;
-        this.strategy = chooseStrategy(produk,alamat);
+        this.strategy = chooseStrategy();
     }
-    private Strategy chooseStrategy(Product produk, String alamat){
-        int hitungan = produk.hashCode()*alamat.hashCode()%3;//implementasi boongan
+    private Strategy chooseStrategy(){
+        int hitungan = this.produk.hashCode()*this.alamat.hashCode()%3;//implementasi boongan
         if (hitungan==0) return Strategy.pickup;
         if (hitungan==1) return Strategy.bajaj;
         return Strategy.warpGate;

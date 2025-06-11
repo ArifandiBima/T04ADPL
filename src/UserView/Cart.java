@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import AdminView.Logger;
 import AdminView.Product;
+import java.util.Map;
 /**
  *
  * @author Rits08
@@ -31,8 +32,11 @@ public class Cart {
         return implemented;
     }
     public int countTotal(){
-        return 0;
-        //unimplemented
+        int hasil=0;
+        for (Map.Entry<Product,Integer> entry: contents.entrySet()){
+            hasil+= entry.getKey().countPrice()*entry.getValue();
+        }
+        return hasil;
     }
     public boolean checkOut(int metode, String alamat){
         if(!PaymentMethod.verify(metode, "embel_embel")) return false;
