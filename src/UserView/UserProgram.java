@@ -97,9 +97,9 @@ public class UserProgram {
     private static void checkOut(Scanner sc){
         System.out.println("Melakukan checkout...");
         Cart myCart = Cart.getCart();
-        System.out.println("Tolong pilih metode pembayaran");
         System.out.println("Masukkan alamat tujuan\n");
         String alamat = sc.nextLine();
+        System.out.println("Tolong pilih metode pembayaran");
         System.out.println("1.Qris\n2.Transfer Bank\n");
         int metode = sc.nextInt();
         if(myCart.checkOut(metode, alamat))
