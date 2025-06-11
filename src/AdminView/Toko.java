@@ -27,7 +27,7 @@ public class Toko{
         Scanner productScanner;
         while(sc.hasNext()){
             String nextProduct = sc.nextLine();
-            modifier = new boolean[1];
+            modifier = new boolean[2];
             productScanner = new Scanner(nextProduct);
             id = productScanner.nextInt();
             productName = productScanner.next();

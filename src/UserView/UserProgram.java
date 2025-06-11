@@ -2,13 +2,12 @@ package UserView;
 
 
 import AdminView.Product;
-import AdminView.MainProduct;
 import AdminView.Toko;
 import java.util.Map;
 import java.util.Scanner;
 
 public class UserProgram {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         Scanner sc = new Scanner(System.in);
         int perintah = 0;
         boolean lanjut = true;
@@ -44,91 +43,71 @@ public class UserProgram {
 
         sc.close();
     }
-
-    private static void listProducts(Scanner sc) {
-        if (Toko.products.isEmpty()) {
+    private static void listProducts(Scanner sc) throws Exception{
+        if (Toko.getProducts().isEmpty()) {
             System.out.println("Tidak ada produk tersedia.");
             return;
         }
 
         System.out.println("Daftar Produk:");
-        for (MainProduct p : Toko.products.values()) {
-            System.out.println("ID: " + p.id + " | " + p.nama + " | Harga: " + p.price + " | Stok: " + p.qty);
+        for (Product entry : Toko.products.values()) {
+            System.out.println(entry.toString());
         }
 
         System.out.print("Masukkan ID produk untuk ditambahkan ke keranjang (atau ketik '0' untuk kembali): ");
-        String idStr = sc.next();
-        if (idStr.equals("0")) return;
+        int id = sc.nextInt();
+        if (id==0) return;
 
-        int id;
-        try {
-            id = Integer.parseInt(idStr);
-        } catch (NumberFormatException e) {
-            System.out.println("ID tidak valid.");
-            return;
-        }
-
-        MainProduct selected = Toko.products.get(idStr);
-        if (selected == null) {
+        Product produk = Toko.products.get(id);
+        if (produk == null) {
             System.out.println("Produk tidak ditemukan.");
             return;
         }
 
         System.out.print("Masukkan jumlah: ");
         int qty = sc.nextInt();
-        if (qty <= 0 || qty > selected.qty) {
-            System.out.println("Jumlah tidak valid atau stok tidak mencukupi.");
-            return;
-        }
 
-        Cart myCart = Cart.getCart();
-        myCart.addToCart(selected, qty);
+        addToCart(produk, qty);
         System.out.println("Produk ditambahkan ke keranjang.");
     }
 
     private static void viewCart(Scanner sc) {
         Cart myCart = Cart.getCart();
-
         if (myCart.contents.isEmpty()) {
             System.out.println("Keranjang kamu kosong.");
             return;
         }
 
         System.out.println("Isi Keranjang:");
-        for (Map.Entry<Product, Integer> entry : myCart.contents.entrySet()) {
+        for (Map.Entry<Product,Integer> entry: myCart.contents.entrySet()) {
             System.out.println(entry.getKey().toString() + " | Qty: " + entry.getValue());
         }
 
-        System.out.println("Total: " + countTotalPrice(myCart));
+        System.out.println("Total: " + countTotalPrice());
         System.out.print("Ketik 1 untuk checkout atau 0 untuk kembali: ");
         int opsi = sc.nextInt();
-        if (opsi == 1) {
-            checkOut(myCart);
-        }
+        if (opsi == 1) checkOut(sc);
     }
 
-    private static void checkOut(Cart myCart) {
+    private static void addToCart(Product produk, int qty){
+        Cart myCart = Cart.getCart();
+        myCart.addToCart(produk, qty);
+    }
+    
+    private static void checkOut(Scanner sc){
         System.out.println("Melakukan checkout...");
-
-        for (Map.Entry<Product, Integer> entry : myCart.contents.entrySet()) {
-            Product p = entry.getKey();
-            int qty = entry.getValue();
-
-            if (p instanceof MainProduct) {
-                MainProduct mp = (MainProduct) p;
-                mp.qty -= qty;
-            }
-        }
-
-        System.out.println("Checkout berhasil. Terima kasih sudah belanja!");
-        myCart.contents.clear();
+        Cart myCart = Cart.getCart();
+        System.out.println("Tolong pilih metode pembayaran");
+        System.out.println("Masukkan alamat tujuan\n");
+        String alamat = sc.nextLine();
+        System.out.println("1.Qris\n2.Transfer Bank\n");
+        int metode = sc.nextInt();
+        if(myCart.checkOut(metode, alamat))
+            System.out.println("Checkout berhasil. Terima kasih sudah belanja!");
     }
 
-    private static int countTotalPrice(Cart myCart) {
-        int total = 0;
-        for (Map.Entry<Product, Integer> entry : myCart.contents.entrySet()) {
-            total += entry.getKey().countPrice() * entry.getValue();
-        }
-        return total;
-    }
+    private static int countTotalPrice(){
+        Cart myCart = Cart.getCart();
+        return myCart.countTotal();
+        } 
 }
