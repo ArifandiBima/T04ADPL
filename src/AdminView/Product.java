@@ -38,7 +38,7 @@ class MainProduct extends Product{
     }
     @Override
     public String toString(){
-        return this.nama+" Rp"+this.price+" ";
+        return this.id+" " +this.nama+" Rp"+this.price;
     }
     @Override
     public int hashCode(){

@@ -24,6 +24,9 @@ public class Toko{
         boolean[] modifier;
         products = new HashMap<>();
         Scanner sc = new Scanner(Paths.get("AdminView/dataProduk.data"));
+
+        Scanner productScanner;
+
         while(sc.hasNext()){
             String nextProduct = sc.nextLine();
             modifier = new boolean[2];
