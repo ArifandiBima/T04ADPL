@@ -11,6 +11,7 @@ package AdminView;
 import AdminView.Product;
 import java.util.Scanner;
 
+
 public class AdminProgram{
     public static void main(String[] args) throws Exception{
         Scanner sc = new Scanner(System.in);
@@ -32,7 +33,12 @@ public class AdminProgram{
             }
             switch (perintah) {
                 case 1: listProducts();break;
-                case 2: editProducts(sc);break;
+                case 2: try {
+                    editProducts(sc);
+                        } catch (Exception e) {
+                        System.out.println("Terjadi kesalahan saat edit produk: " + e.getMessage());
+                    }
+                    break;
                 default:lanjut=false;
             }
             perintah = 0;
