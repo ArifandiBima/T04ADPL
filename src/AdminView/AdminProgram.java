@@ -52,7 +52,7 @@ public class AdminProgram{
             //ADA TAMBAHAN DI SINI
         }
     }
-   private static void editProducts(Scanner sc)throws Exception{
+    private static void editProducts(Scanner sc)throws Exception{
     if(Toko.getProducts().isEmpty()){
         System.out.println("Tidak ada produk untuk diedit.");
         return;
